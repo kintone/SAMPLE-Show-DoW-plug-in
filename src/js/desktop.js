@@ -7,14 +7,14 @@
 (function(PLUGIN_ID) {
     'use strict';
 
-    // Get plugin configuration settings
+    // Get plug-in configuration settings
     var CONFIG = kintone.plugin.app.getConfig(PLUGIN_ID);
     // Get each settings
     if (!CONFIG) {
         return false;
     }
 
-    var DATE = CONFIG.date_field; // field code of date field
+    var DATE = CONFIG.date_field; // Field code of Date field
 
     kintone.events.on(['app.record.detail.show'], function(event) {
         var record = event.record;
