@@ -15,6 +15,7 @@ jQuery.noConflict();
         return htmlstr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
+    
     function setDropDown() {
         // Retrieve field information, then set dropdown
         return kintone.api(kintone.api.url('/k/v1/preview/app/form/fields', true), 'GET',
@@ -54,6 +55,7 @@ jQuery.noConflict();
             return alert('Failed to retrieve field(s) information');
         });
     }
+    
     $(document).ready(function() {
         // Set dropdown list
         setDropDown();
