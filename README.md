@@ -50,4 +50,4 @@ Please feel free to host plug-ins with new features on your own repository.
 Bug fixes are happily accepted.
 
 ## More information
-More information on the plug-in can be found here https://developer.kintone.io/hc/en-us/articles/360010076614
+More detailed information on the plug-in can be found here https://developer.kintone.io/hc/en-us/articles/360010076614
