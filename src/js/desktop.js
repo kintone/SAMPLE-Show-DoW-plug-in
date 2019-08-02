@@ -5,30 +5,30 @@
  * Licensed under the MIT License
  */
 (function(PLUGIN_ID) {
-    'use strict';
+  'use strict';
 
-    // Get plug-in configuration settings
-    var CONFIG = kintone.plugin.app.getConfig(PLUGIN_ID);
-    // Get each settings
-    if (!CONFIG) {
-        return false;
-    }
+  // Get plug-in configuration settings
+  var CONFIG = kintone.plugin.app.getConfig(PLUGIN_ID);
+  var DATE;
+  // Get each settings
+  if (!CONFIG) {
+    return false;
+  }
 
-    var DATE = CONFIG.date_field; // Field code of Date field
+  DATE = CONFIG.date; // Field code of Date field
 
-    kintone.events.on(['app.record.detail.show'], function(event) {
-        var record = event.record;
+  kintone.events.on(['app.record.detail.show'], function(event) {
+    var record = event.record;
 
-        var weekchars = JSON.parse(CONFIG.name_of_days);
-        var date = new Date(record[DATE].value);
-        var day = weekchars[date.getUTCDay()];
+    var weekchars = JSON.parse(CONFIG.dayName);
+    var date = new Date(record[DATE].value);
+    var day = weekchars[date.getUTCDay()];
+    var dayEl = document.createElement('span');
+    var dateEl = kintone.app.record.getFieldElement(DATE);
 
-        var dayEl = document.createElement('span');
-        dayEl.textContent = ' (' + day + ')';
+    dayEl.textContent = ' (' + day + ')';
+    dateEl.appendChild(dayEl);
 
-        var dateEl = kintone.app.record.getFieldElement(DATE);
-        dateEl.appendChild(dayEl);
-
-        return event;
-    });
+    return event;
+  });
 })(kintone.$PLUGIN_ID);
