@@ -57,7 +57,7 @@ jQuery.noConflict();
       $thu.val(days[4]);
       $fri.val(days[5]);
       $sat.val(days[6]);
-    }, function(resp) {
+    }, function() {
       return alert('Failed to retrieve field(s) information');
     });
   }
