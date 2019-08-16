@@ -15,12 +15,12 @@
     return false;
   }
 
-  DATE = CONFIG.date; // Field code of Date field
+  DATE = CONFIG.date_field; // Field code of Date field
 
   kintone.events.on(['app.record.detail.show'], function(event) {
     var record = event.record;
 
-    var weekchars = JSON.parse(CONFIG.dayName);
+    var weekchars = JSON.parse(CONFIG.name_of_days);
     var date = new Date(record[DATE].value);
     var day = weekchars[date.getUTCDay()];
     var dayEl = document.createElement('span');
