@@ -20,8 +20,8 @@
       "css/config.css"
     ],
     "required_params": [
-      "date",
-      "dayName"
+      "date_field",
+      "name_of_days"
     ]
   },
   "name": {
