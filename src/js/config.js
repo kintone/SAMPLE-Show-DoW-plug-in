@@ -10,6 +10,16 @@ jQuery.noConflict();
   // Get configuration settings
 
   var CONF = kintone.plugin.app.getConfig(PLUGIN_ID);
+  var $form = $('.js-submit-settings');
+  var $cancelButton = $('.js-cancel-button');
+  var $date = $('select[name="js-select-date-field"]');
+  var $sun = $('input[name="js-sun-text"]');
+  var $mon = $('input[name="js-mon-text"]');
+  var $tue = $('input[name="js-tue-text"]');
+  var $wed = $('input[name="js-wed-text"]');
+  var $thu = $('input[name="js-thu-text"]');
+  var $fri = $('input[name="js-fri-text"]');
+  var $sat = $('input[name="js-sat-text"]');
 
   function escapeHtml(htmlstr) {
     return htmlstr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -18,40 +28,36 @@ jQuery.noConflict();
 
   function setDropDown() {
     // Retrieve field information, then set dropdown
-    return kintone.api(kintone.api.url('/k/v1/preview/app/form/fields', true), 'GET',
-      {'app': kintone.app.getId()}).then(function(resp) {
-
-      for (var key in resp.properties) {
-        if (!resp.properties.hasOwnProperty(key)) {
-          continue;
-        }
-        var prop = resp.properties[key];
-        var $option = $('<option>');
-
-        switch (prop.type) {
+    return KintoneConfigHelper.getFields('DATE').then(function(resp) {
+      var $dateDropDown = $date;
+      var days;
+      resp.forEach(function(respField) {
+        var $option = $('<option></option>');
+        switch (respField.type) {
           case 'DATE':
-            $option.attr('value', prop.code);
-            $option.text(escapeHtml(prop.label));
-            $('#select_date_field').append($option.clone());
+            $option.attr('value', respField.code);
+            $option.text(escapeHtml(respField.label));
+            $dateDropDown.append($option.clone());
             break;
           default:
             break;
         }
-      }
+      });
+
       // Set default values
-      $('#select_date_field').val(CONF.date_field);
+      $date.val(CONF.date_field);
       if (CONF.name_of_days === undefined) {
         return; // Return if config is not set.
       }
-      var days = JSON.parse(CONF.name_of_days);
-      $('#sun_text').val(days[0]);
-      $('#mon_text').val(days[1]);
-      $('#tue_text').val(days[2]);
-      $('#wed_text').val(days[3]);
-      $('#thu_text').val(days[4]);
-      $('#fri_text').val(days[5]);
-      $('#sat_text').val(days[6]);
-    }, function(resp) {
+      days = JSON.parse(CONF.name_of_days);
+      $sun.val(days[0]);
+      $mon.val(days[1]);
+      $tue.val(days[2]);
+      $wed.val(days[3]);
+      $thu.val(days[4]);
+      $fri.val(days[5]);
+      $sat.val(days[6]);
+    }, function() {
       return alert('Failed to retrieve field(s) information');
     });
   }
@@ -60,31 +66,29 @@ jQuery.noConflict();
     // Set dropdown list
     setDropDown();
     // Set input values when 'Save' button is clicked
-    $('#check-plugin-submit').click(function() {
+    $form.on('submit', function(e) {
       var config = [];
       var days = [];
-      var date_field = $('#select_date_field').val();
-      var sun = $('#sun_text').val();
-      var mon = $('#mon_text').val();
-      var tue = $('#tue_text').val();
-      var wed = $('#wed_text').val();
-      var thu = $('#thu_text').val();
-      var fri = $('#fri_text').val();
-      var sat = $('#sat_text').val();
-      // Check required fields
-      if (date_field === '' || sun === '' || mon === '' || tue === '' || wed === '' ||
-                thu === '' || fri === '' || sat === '') {
-        alert('Please set required field(s)');
-        return;
-      }
+      var date = $date.val();
+      var sun = $sun.val();
+      var mon = $mon.val();
+      var tue = $tue.val();
+      var wed = $wed.val();
+      var thu = $thu.val();
+      var fri = $fri.val();
+      var sat = $sat.val();
+      e.preventDefault();
       days.push(sun, mon, tue, wed, thu, fri, sat);
-      config.date_field = date_field;
+      config.date_field = date;
       config.name_of_days = JSON.stringify(days);
-      kintone.plugin.app.setConfig(config);
+      kintone.plugin.app.setConfig(config, function() {
+        alert('The plug-in settings have been saved. Please update the app!');
+        window.location.href = '/k/admin/app/flow?app=' + kintone.app.getId();
+      });
     });
     // Process when 'Cancel' is clicked
-    $('#check-plugin-cancel').click(function() {
-      history.back();
+    $cancelButton.on('click', function() {
+      window.location.href = '/k/admin/app/' + kintone.app.getId() + '/plugin/';
     });
   });
 })(jQuery, kintone.$PLUGIN_ID);

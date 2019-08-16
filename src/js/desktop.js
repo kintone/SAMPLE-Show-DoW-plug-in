@@ -9,12 +9,13 @@
 
   // Get plug-in configuration settings
   var CONFIG = kintone.plugin.app.getConfig(PLUGIN_ID);
+  var DATE;
   // Get each settings
   if (!CONFIG) {
     return false;
   }
 
-  var DATE = CONFIG.date_field; // Field code of Date field
+  DATE = CONFIG.date_field; // Field code of Date field
 
   kintone.events.on(['app.record.detail.show'], function(event) {
     var record = event.record;
@@ -22,11 +23,10 @@
     var weekchars = JSON.parse(CONFIG.name_of_days);
     var date = new Date(record[DATE].value);
     var day = weekchars[date.getUTCDay()];
-
     var dayEl = document.createElement('span');
-    dayEl.textContent = ' (' + day + ')';
-
     var dateEl = kintone.app.record.getFieldElement(DATE);
+
+    dayEl.textContent = ' (' + day + ')';
     dateEl.appendChild(dayEl);
 
     return event;

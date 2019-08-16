@@ -2,64 +2,64 @@
 Copyright (c) 2018 Cybozu
 https://github.com/kintone/SAMPLE-Show-DoW-plug-in/blob/master/LICENSE -->
 
-<div>
-	<div class="block">
-		<label class="kintoneplugin-label">
-			<span id ="container_label">Date field to display Day of Week</span>
-			<span class="kintoneplugin-require">*</span>
-		</label>
-		<div class="kintoneplugin-row">Please select a Date field</div>
-		<div class="kintoneplugin-select-outer">
-			<div class="kintoneplugin-select">
-				<select id="select_date_field" name="select_date_field">
-					<option value="">-----</option>
-				</select>
+<section>
+	<form class="js-submit-settings">
+		<div class="kintoneplugin-row">
+			<label for="select-date-field" class="kintoneplugin-label">Date field to display Day of Week
+				<span class="kintoneplugin-require">*</span>
+			</label>
+			<p class="kintoneplugin-desc">Please select a Date field</p>
+			<div class="kintoneplugin-select-outer">
+				<div class="kintoneplugin-select">
+					<select name="js-select-date-field" id="select-date-field">
+						<option value="">-----</option>
+					</select>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="block">
-		<label class="kintoneplugin-label">
-			<span id ="container_label">Name of days to display</span>
-			<span class="kintoneplugin-require">*</span>
-		</label>
-		<div class="kintoneplugin-row"></div>
-		<div class="kintoneplugin-input-outer">
-			<div class="kintoneplugin-label">Sunday</div>
-			<input id="sun_text" class="kintoneplugin-input-text" type="text">
+		<div class="kintoneplugin-row">
+			<label class="kintoneplugin-label">Name of days to display
+				<span class="kintoneplugin-require">*</span>
+			</label>
+			<div class="kintoneplugin-row"></div>
+			<div class="kintoneplugin-input-outer">
+				<label for="sun-text" class="kintoneplugin-label">Sunday</label><br>
+				<input id="sun-text" name="js-sun-text" class="kintoneplugin-input-text" type="text">
+			</div>
+			<div class="kintoneplugin-row"></div>
+			<div class="kintoneplugin-input-outer">
+				<label for="mon-text" class="kintoneplugin-label">Monday</label><br>
+				<input id="mon-text" name="js-mon-text" class="kintoneplugin-input-text" type="text">
+			</div>
+			<div class="kintoneplugin-row"></div>
+			<div class="kintoneplugin-input-outer">
+				<label for="tue-text" class="kintoneplugin-label">Tuesday</label><br>
+				<input id="tue-text" name="js-tue-text" class="kintoneplugin-input-text" type="text">
+			</div>
+			<div class="kintoneplugin-row"></div>
+			<div class="kintoneplugin-input-outer">
+				<label for="wed-text" class="kintoneplugin-label">Wednesday</label><br>
+				<input id="wed-text" name="js-wed-text" class="kintoneplugin-input-text" type="text">
+			</div>
+			<div class="kintoneplugin-row"></div>
+			<div class="kintoneplugin-input-outer">
+				<label for="thu-text" class="kintoneplugin-label">Thursday</label><br>
+				<input id="thu-text" name="js-thu-text" class="kintoneplugin-input-text" type="text">
+			</div>
+			<div class="kintoneplugin-row"></div>
+			<div class="kintoneplugin-input-outer">
+				<label for="fri-text" class="kintoneplugin-label">Friday</label><br>
+				<input id="fri-text" name="js-fri-text" class="kintoneplugin-input-text" type="text">
+			</div>
+			<div class="kintoneplugin-row"></div>
+			<div class="kintoneplugin-input-outer">
+				<label for="sat-text" class="kintoneplugin-label">Saturday</label><br>
+				<input id="sat-text" name="js-sat-text" class="kintoneplugin-input-text" type="text">
+			</div>
 		</div>
-		<div class="kintoneplugin-row"></div>
-		<div class="kintoneplugin-input-outer">
-			<div class="kintoneplugin-label">Monday</div>
-			<input id="mon_text" class="kintoneplugin-input-text" type="text">
-		</div>
-		<div class="kintoneplugin-row"></div>
-		<div class="kintoneplugin-input-outer">
-			<div class="kintoneplugin-label">Tuesday</div>
-			<input id="tue_text" class="kintoneplugin-input-text" type="text">
-		</div>
-		<div class="kintoneplugin-row"></div>
-		<div class="kintoneplugin-input-outer">
-			<div class="kintoneplugin-label">Wednesday</div>
-			<input id="wed_text" class="kintoneplugin-input-text" type="text">
-		</div>
-		<div class="kintoneplugin-row"></div>
-		<div class="kintoneplugin-input-outer">
-			<div class="kintoneplugin-label">Thursday</div>
-			<input id="thu_text" class="kintoneplugin-input-text" type="text">
-		</div>
-		<div class="kintoneplugin-row"></div>
-		<div class="kintoneplugin-input-outer">
-			<div class="kintoneplugin-label">Friday</div>
-			<input id="fri_text" class="kintoneplugin-input-text" type="text">
-		</div>
-		<div class="kintoneplugin-row"></div>
-		<div class="kintoneplugin-input-outer">
-			<div class="kintoneplugin-label">Saturday</div>
-			<input id="sat_text" class="kintoneplugin-input-text" type="text">
-		</div>
-	</div>
-	<div class="block">
-		<button type="button" id="check-plugin-cancel" class="kintoneplugin-button-dialog-cancel">　Cancel　</button>
-		<button type="button" id="check-plugin-submit" class="kintoneplugin-button-dialog-ok">　Save　</button>
-	</div>
-</div>
+		<p class="kintoneplugin-row">
+			<button type="button" class="js-cancel-button kintoneplugin-button-dialog-cancel">　Cancel　</button>
+			<button class="kintoneplugin-button-dialog-ok">　Save　</button>
+		</p>
+	</form>
+</section>
