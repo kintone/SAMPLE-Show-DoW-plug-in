@@ -45,7 +45,7 @@ jQuery.noConflict();
       });
 
       // Set default values
-      $date.val(CONF.date);
+      $date.val(CONF.date_field);
       if (CONF.dayName === undefined) {
         return; // Return if config is not set.
       }
@@ -79,7 +79,7 @@ jQuery.noConflict();
       var sat = $sat.val();
       e.preventDefault();
       days.push(sun, mon, tue, wed, thu, fri, sat);
-      config.date = date;
+      config.date_field = date;
       config.dayName = JSON.stringify(days);
       kintone.plugin.app.setConfig(config, function() {
         alert('The plug-in settings have been saved. Please update the app!');
