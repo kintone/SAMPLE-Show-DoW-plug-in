@@ -46,10 +46,10 @@ jQuery.noConflict();
 
       // Set default values
       $date.val(CONF.date_field);
-      if (CONF.dayName === undefined) {
+      if (CONF.name_of_days === undefined) {
         return; // Return if config is not set.
       }
-      days = JSON.parse(CONF.dayName);
+      days = JSON.parse(CONF.name_of_days);
       $sun.val(days[0]);
       $mon.val(days[1]);
       $tue.val(days[2]);
@@ -80,7 +80,7 @@ jQuery.noConflict();
       e.preventDefault();
       days.push(sun, mon, tue, wed, thu, fri, sat);
       config.date_field = date;
-      config.dayName = JSON.stringify(days);
+      config.name_of_days = JSON.stringify(days);
       kintone.plugin.app.setConfig(config, function() {
         alert('The plug-in settings have been saved. Please update the app!');
         window.location.href = '/k/admin/app/flow?app=' + kintone.app.getId();
